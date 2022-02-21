@@ -25,8 +25,15 @@ export default {
   },
 
   mounted(){
-    this.cld = cloudinary.Cloudinary.new({ cloud_name: 'hackit-africa' });
-    let demoplayer = this.cld.videoPlayer('video-player').width(600);
+    this.cld = cloudinary.Cloudinary.new({ cloud_name: process.env.NUXT_ENV_CLOUDINARY_CLOUD_NAME });
+    let demoplayer = this.cld.videoPlayer(
+        'video-player',
+        {
+          autoplay:true,
+          loop: true
+        }
+      )
+      .width(600);
     demoplayer.source(this.video);
 
     var liveControls = document.getElementsByClassName("vjs-live-control");
